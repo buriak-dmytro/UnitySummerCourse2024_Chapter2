@@ -5,17 +5,50 @@ namespace BouncyBallShowcase
 {
     public class PassingThroughCalculator : MonoBehaviour
     {
-        public TextMeshProUGUI OutputPasshingThroughNumber;
+        public TextMeshProUGUI OutputPassingThroughNumber;
+        public GameObject Sphere;
         private int _passingThroughNumber = 0;
-        
-        private void OnTriggerEnter(Collider other)
+        private Bounds _thisBounds;
+        private bool _isContainsSphere = false;
+
+        void Awake()
         {
-            if (other.CompareTag("TriggerObject"))
+            _thisBounds = GetComponent<Collider>().bounds;
+        }
+
+        void FixedUpdate()
+        {
+            CheckSpherePassing();
+        }
+
+        private void CheckSpherePassing()
+        {
+            if (DoesSphereEnterFirstTime())
             {
                 _passingThroughNumber++;
-                OutputPasshingThroughNumber.text = 
+                OutputPassingThroughNumber.text = 
                     _passingThroughNumber.ToString();
+
+                _isContainsSphere = true;
             }
+            else if (DoesSphereExitFirstTime())
+            {
+                _isContainsSphere = false;
+            }
+        }
+
+        private bool DoesSphereEnterFirstTime()
+        {
+            return
+                _thisBounds.Contains(Sphere.transform.position) &&
+                !_isContainsSphere;
+        }
+
+        private bool DoesSphereExitFirstTime()
+        {
+            return
+                !_thisBounds.Contains(Sphere.transform.position) &&
+                _isContainsSphere;
         }
     }
 }
