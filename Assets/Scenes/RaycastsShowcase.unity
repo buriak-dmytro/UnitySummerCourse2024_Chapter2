@@ -815,6 +815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UserInput: {fileID: 40214794}
+  DebugLineStartPosition: {fileID: 1831539397}
 --- !u!1 &1174696221
 GameObject:
   m_ObjectHideFlags: 0

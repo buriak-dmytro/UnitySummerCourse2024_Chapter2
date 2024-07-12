@@ -155,8 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb79a280ddcc2447bd9d548319c70e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionOfMovement: {x: 0.51, y: 0.27, z: 0.21}
-  speedOfMovement: 50
+  DirectionOfMovement: {x: 1, y: 1, z: 0}
+  SpeedOfMovement: 1
 --- !u!136 &8426889
 CapsuleCollider:
   m_ObjectHideFlags: 0
