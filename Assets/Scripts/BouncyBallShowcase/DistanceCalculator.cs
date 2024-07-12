@@ -5,14 +5,14 @@ namespace BouncyBallShowcase
 {
     public class DistanceCalculator : MonoBehaviour
     {
-        public TextMeshProUGUI outputDistance;
-        private bool isPossibleToFindDistance = true;
-        private float distanceToFloor = 0;
-        private SphereCollider spCollider;
+        public TextMeshProUGUI OutputDistance;
+        private bool _isPossibleToFindDistance = true;
+        private float _distanceToFloor = 0;
+        private SphereCollider _spCollider;
 
         void Awake()
         {
-            spCollider = GetComponent<SphereCollider>();
+            _spCollider = GetComponent<SphereCollider>();
         }
 
         void Update()
@@ -30,13 +30,13 @@ namespace BouncyBallShowcase
             RaycastHit hit;
             if (Physics.Raycast(rayToFloor, out hit))
             {
-                isPossibleToFindDistance = true;
-                distanceToFloor = hit.distance;
+                _isPossibleToFindDistance = true;
+                _distanceToFloor = hit.distance;
             }
             else
             {
-                isPossibleToFindDistance = false;
-                distanceToFloor = -1;
+                _isPossibleToFindDistance = false;
+                _distanceToFloor = -1;
             }
         }
 
@@ -44,18 +44,18 @@ namespace BouncyBallShowcase
         {
             return
                 transform.position +
-                Vector3.down * spCollider.radius;
+                Vector3.down * _spCollider.radius;
         }
         
         private void OutputDistanceToCanvas()
         {
-            if (isPossibleToFindDistance)
+            if (_isPossibleToFindDistance)
             {
-                outputDistance.text = distanceToFloor.ToString("0.00");
+                OutputDistance.text = _distanceToFloor.ToString("0.00");
             }
             else
             {
-                outputDistance.text = "unknown";
+                OutputDistance.text = "unknown";
             }
         }
     }

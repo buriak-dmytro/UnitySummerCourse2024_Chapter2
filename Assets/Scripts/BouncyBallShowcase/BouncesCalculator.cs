@@ -5,13 +5,13 @@ namespace BouncyBallShowcase
 {
     public class BouncesCalculator : MonoBehaviour
     {
-        public TextMeshProUGUI outputBouncesNumber;
-        private int bouncesNumber = 0;
+        public TextMeshProUGUI OutputBouncesNumber;
+        private int _bouncesNumber = 0;
 
         private void OnCollisionEnter(Collision collision)
         {
-            bouncesNumber++;
-            outputBouncesNumber.text = bouncesNumber.ToString();
+            _bouncesNumber++;
+            OutputBouncesNumber.text = _bouncesNumber.ToString();
         }
     }
 }

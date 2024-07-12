@@ -5,8 +5,8 @@ namespace TransformComponentShowcase
     public class ConstantRotation : MonoBehaviour
     {
         public bool IsUseQuaternion;
-        public float rotationsPerMinute;
-        public Vector3 axisOfRotation;
+        public float RotationsPerMinute;
+        public Vector3 AxisOfRotation;
         
         void Update()
         {
@@ -24,18 +24,18 @@ namespace TransformComponentShowcase
 
         private void RotateWithTransform(float angle)
         {
-            transform.Rotate(axisOfRotation, angle);
+            transform.Rotate(AxisOfRotation, angle);
         }
 
         private void RotateWithQuaternionAngles(float angle)
         {
-            transform.rotation *= Quaternion.AngleAxis(angle, axisOfRotation);
+            transform.rotation *= Quaternion.AngleAxis(angle, AxisOfRotation);
         }
 
         private float CalculateRotationAngleInUpdate()
         {
             return
-                rotationsPerMinute *
+                RotationsPerMinute *
                 360.0f *
                 Time.deltaTime / 
                 60.0f;

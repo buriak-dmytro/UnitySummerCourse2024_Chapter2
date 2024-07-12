@@ -4,9 +4,9 @@ namespace VectorArithmeticShowcase
 {
     public class ConstantMovmentAlongNormal : MonoBehaviour
     {
-        public Vector3 directionOfMovement;
+        public Vector3 DirectionOfMovement;
         [Tooltip("Units per minute")]
-        public float speedOfMovement;
+        public float SpeedOfMovement;
     
         void Update()
         {
@@ -17,8 +17,8 @@ namespace VectorArithmeticShowcase
         private void MoveAlongPassedVector()
         {
             transform.position +=
-                directionOfMovement.normalized *
-                speedOfMovement * 
+                DirectionOfMovement.normalized *
+                SpeedOfMovement * 
                 Time.deltaTime / 
                 60.0f;
         }
@@ -26,7 +26,7 @@ namespace VectorArithmeticShowcase
         private void FaceMovementDirection()
         {
             transform.forward =
-                directionOfMovement.normalized;
+                DirectionOfMovement.normalized;
         }
     }
 }
