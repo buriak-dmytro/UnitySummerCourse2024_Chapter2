@@ -55,6 +55,8 @@ namespace UnityWebRequestShowcase
             {
                 Debug.Log("Form upload complete!");
             }
+
+            uwr.Dispose();
         }
 
         public void SaveInfo()
@@ -99,6 +101,8 @@ namespace UnityWebRequestShowcase
                 Debug.Log("File successfully downloaded");
                 LoadInfo();
             }
+
+            uwr.Dispose();
         }
 
         public void LoadInfo()
