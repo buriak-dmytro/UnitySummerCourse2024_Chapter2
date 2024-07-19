@@ -10,13 +10,33 @@ namespace SphereCastShowcase
 
         [HideIfEnumValue("ShootMethod", HideIf.Equal, (int) ShootType.Raycast)]
         public float SphereShootRadius = 2.5f;
+        private bool _isDrawSphere = false;
+        private Vector3 _shootEnd;
         public Transform ShootBegin;
         private RaycastHit _raycastHit;
-        
+
+        void Awake()
+        {
+            CalculateShootEnd();
+        }
+
         void Update()
         {
             BeginShootProcess();
-            DrawDebugLine();
+            DrawDebugRay();
+        }
+
+        void FixedUpdate()
+        {
+            CalculateShootEnd();
+        }
+
+        void OnDrawGizmos()
+        {
+            if (_isDrawSphere)
+            {
+                DrawSphere();
+            }
         }
 
         private void BeginShootProcess()
@@ -72,13 +92,38 @@ namespace SphereCastShowcase
             Destroy(_raycastHit.collider.gameObject);
         }
 
-        private void DrawDebugLine()
+        private void DrawDebugRay()
+        {
+            switch (ShootMethod)
+            {
+                case ShootType.Raycast:
+                    DrawRay();
+                    break;
+                case ShootType.SphereCast:
+                    _isDrawSphere = true;
+                    break;
+            }
+        }
+
+        private void DrawRay()
         {
             Debug.DrawLine(
                 ShootBegin.position,
-                ShootBegin.position + ShootBegin.up * 20,
+                _shootEnd,
                 Color.blue,
                 Time.deltaTime);
+        }
+
+        private void DrawSphere()
+        {
+            Gizmos.DrawWireSphere(ShootBegin.position, SphereShootRadius);
+            Gizmos.DrawWireSphere(_shootEnd, SphereShootRadius);
+            Gizmos.DrawLine(ShootBegin.position, _shootEnd);
+        }
+
+        private Vector3 CalculateShootEnd()
+        {
+            return _shootEnd = ShootBegin.position + ShootBegin.up * 20;
         }
     }
 }
